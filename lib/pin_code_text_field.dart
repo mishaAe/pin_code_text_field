@@ -547,12 +547,12 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
               width: 16,
               height: 26,
               child: Container(
-                width: 16,
-                height: 16,
+                width: 8,
+                height: 8,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: Colors.grey),
+                    shape: BoxShape.circle, color: Colors.white38),
               ),
-            )            ,
+            ),
           ),
           width: widget.pinBoxWidth,
           height: widget.pinBoxHeight,
