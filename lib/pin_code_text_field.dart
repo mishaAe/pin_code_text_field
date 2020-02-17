@@ -540,13 +540,32 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
     }
     return Padding(
       padding: insets,
-      child: Container(
-        key: ValueKey<String>("container$i"),
-        child: Center(child: _animatedTextBox(strList[i], i)),
-        decoration: boxDecoration,
-        width: widget.pinBoxWidth,
-        height: widget.pinBoxHeight,
-      ),
+      child: Stack(children: <Widget>[
+        widget.highlight || i >= text.length ? Container(
+          child: Center(
+            child: SizedBox(
+              width: 16,
+              height: 26,
+              child: Container(
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Colors.grey),
+              ),
+            )            ,
+          ),
+          width: widget.pinBoxWidth,
+          height: widget.pinBoxHeight,
+        ) : Container(width: widget.pinBoxWidth,
+          height: widget.pinBoxHeight,),
+        Container(
+          key: ValueKey<String>("container$i"),
+          child: Center(child: _animatedTextBox(strList[i], i)),
+          decoration: boxDecoration,
+          width: widget.pinBoxWidth,
+          height: widget.pinBoxHeight,
+        )
+      ],),
     );
   }
 
