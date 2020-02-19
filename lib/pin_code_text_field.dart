@@ -127,6 +127,7 @@ class PinCodeTextField extends StatefulWidget {
   final PinBoxDecoration pinBoxDecoration;
   final String maskCharacter;
   final TextStyle pinTextStyle;
+  final TextStyle pinErrorTextStyle;
   final double pinBoxHeight;
   final double pinBoxWidth;
   final OnDone onDone;
@@ -160,6 +161,7 @@ class PinCodeTextField extends StatefulWidget {
     this.pinBoxWidth: 70.0,
     this.pinBoxHeight: 70.0,
     this.pinTextStyle,
+    this.pinErrorTextStyle: TextStyle(fontSize: 28, color: Colors(0xffff6868)),
     this.onDone,
     this.defaultBorderColor: Colors.black,
     this.hasTextBorderColor: Colors.black,
@@ -464,8 +466,11 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
   Widget _buildPinCode(int i, BuildContext context) {
     Color borderColor;
     BoxDecoration boxDecoration;
+    TextStyle pinErrorTextStyle;
+
     if (widget.hasError) {
       borderColor = widget.errorBorderColor;
+      pinErrorTextStyle = widget.pinErrorTextStyle;
     } else if (widget.highlightAnimation && _shouldHighlight(i)) {
       return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -560,7 +565,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
           height: widget.pinBoxHeight,),
         Container(
           key: ValueKey<String>("container$i"),
-          child: Center(child: _animatedTextBox(strList[i], i)),
+          child: Center(child: _animatedTextBox(strList[i], i, pinErrorTextStyle)),
           decoration: boxDecoration,
           width: widget.pinBoxWidth,
           height: widget.pinBoxHeight,
@@ -575,7 +580,7 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
             (i == text.length - 1 && text.length == widget.maxLength));
   }
 
-  Widget _animatedTextBox(String text, int i) {
+  Widget _animatedTextBox(String text, int i, [TextStyle pinTextStyle]) {
     if (widget.pinTextAnimatedSwitcherTransition != null) {
       return AnimatedSwitcher(
         duration: widget.pinTextAnimatedSwitcherDuration,
@@ -586,14 +591,14 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
         child: Text(
           text,
           key: ValueKey<String>("$text$i"),
-          style: widget.pinTextStyle,
+          style: pinTextStyle == null ? widget.pinTextStyle : pinTextStyle,
         ),
       );
     } else {
       return Text(
         text,
         key: ValueKey<String>("${strList[i]}$i"),
-        style: widget.pinTextStyle,
+        style: pinTextStyle == null ? widget.pinTextStyle : pinTextStyle,
       );
     }
   }
