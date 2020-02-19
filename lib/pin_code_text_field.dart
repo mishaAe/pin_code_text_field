@@ -161,7 +161,7 @@ class PinCodeTextField extends StatefulWidget {
     this.pinBoxWidth: 70.0,
     this.pinBoxHeight: 70.0,
     this.pinTextStyle,
-    this.pinErrorTextStyle: TextStyle(fontSize: 28, color: Colors(0xffff6868)),
+    this.pinErrorTextStyle: const TextStyle(fontSize: 28, color: Color(0xffff6868)),
     this.onDone,
     this.defaultBorderColor: Colors.black,
     this.hasTextBorderColor: Colors.black,
