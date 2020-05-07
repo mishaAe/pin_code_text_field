@@ -161,7 +161,7 @@ class PinCodeTextField extends StatefulWidget {
     this.pinBoxWidth: 70.0,
     this.pinBoxHeight: 70.0,
     this.pinTextStyle,
-    this.pinErrorTextStyle: TextStyle(fontSize: 28, color: Colors(0xffff6868)),
+    this.pinErrorTextStyle: const TextStyle(fontSize: 28, color: Color(0xffff6868)),
     this.onDone,
     this.defaultBorderColor: Colors.black,
     this.hasTextBorderColor: Colors.black,
@@ -549,8 +549,8 @@ class PinCodeTextFieldState extends State<PinCodeTextField>
         widget.highlight || i >= text.length ? Container(
           child: Center(
             child: SizedBox(
-              width: 16,
-              height: 26,
+              width: 8,
+              height: 8,
               child: Container(
                 width: 8,
                 height: 8,
